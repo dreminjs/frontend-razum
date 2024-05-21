@@ -37,13 +37,14 @@ export const SignupPage = () => {
     
     };
 
-    const [signup,{isSuccess,isLoading,isError}] = useSignupMutation()
+    const [signup,{isSuccess,isLoading,isError,data}] = useSignupMutation()
 
     useEffect(() =>{
         
         if(isSuccess){
             dispatch(setAuth(true))
-           navigate("/contact-us")
+            navigate("/contact-us")
+            localStorage.setItem("userId",data.id)
         }
     },[isSuccess])
 

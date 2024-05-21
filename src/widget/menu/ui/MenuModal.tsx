@@ -24,7 +24,7 @@ export const MenuModal = ({
           </a>
         </li>
         <li className="">
-          <Link className="text-zinc-950 underline" to={"/login"}>
+          <Link className="text-zinc-950 underline" to={"/signin"}>
             ВОЙТИ
           </Link>
         </li>

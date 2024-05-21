@@ -2,11 +2,12 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import { Header } from "../../../features/header"
-import { Container } from "../../../shared/"
+import { Container, useAppDispatch } from "../../../shared/"
 import {useSigninMutation, useSignupMutation} from "../../../app"
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { MessageModal } from "../../../features/MessageModal";
+import { setAuth } from "../../../app/store/authSlice";
 
 
 const schema = yup.object({
@@ -32,12 +33,16 @@ export const SigninPage = () => {
     
     };
 
-    const [signin,{isSuccess,isError}] = useSigninMutation()
+    const dispatch = useAppDispatch()
+
+    const [signin,{isSuccess,isError,data}] = useSigninMutation()
 
     useEffect(() =>{
         
         if(isSuccess){
-           navigate("/contact-us")
+            dispatch(setAuth(true))
+            navigate("/contact-us")
+            localStorage.setItem("userId",data.id)
         }
     },[isSuccess])
 

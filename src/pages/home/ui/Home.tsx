@@ -55,7 +55,7 @@ export const Home = () => {
           разработка гибких инструментов автоматизации вашего бизнеса
         </h1>
       </header>
-      <section className="mb-[125px]">
+      <section className="mb-[125px]" id="#about">
         <Container>
           <h3 className="text-center text-5xl mb-5">О НАС</h3>
           <div className="flex gap-[15px] justify-center max-[1000px]:block">
@@ -111,7 +111,7 @@ export const Home = () => {
           </div>
         </Container>
       </section>
-      <section className="mb-[125px]">
+      <section className="mb-[125px]" >
         <Container>
           <h3 className="text-center text-5xl mb-5">Почему мы?</h3>
           <h4 className="text-center w-[70%] mx-auto text-[#2F353F] mb-[20px]">
@@ -167,7 +167,7 @@ export const Home = () => {
           </ul>
         </Container>
       </section>
-      <section className="mb-[125px]">
+      <section className="mb-[125px]" id="#services">
         <Container>
           <h3 className="text-center text-5xl mb-5">Наши услуги</h3>
           <h4 className="text-center w-[70%] mx-auto text-[#2F353F] mb-[20px]">
