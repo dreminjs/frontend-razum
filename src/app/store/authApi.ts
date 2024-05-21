@@ -19,10 +19,12 @@ export const authApi = baseApi.injectEndpoints({
             })
         }),
         user:builder.query({
-            query:(body) => ({
-                body,
+            query:(id) => ({
                 method:"GET",
-                url:"/user"
+                url:"/user",
+                headers:{
+                    "userId":String(id)
+                }
             })
         }),
     })

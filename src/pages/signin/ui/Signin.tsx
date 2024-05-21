@@ -40,9 +40,9 @@ export const SigninPage = () => {
     useEffect(() =>{
         
         if(isSuccess){
-            dispatch(setAuth(true))
-            navigate("/contact-us")
+
             localStorage.setItem("userId",data.id)
+            navigate("/contact-us")
         }
     },[isSuccess])
 

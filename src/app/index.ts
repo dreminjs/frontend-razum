@@ -6,5 +6,6 @@ export {store} from "./store/store"
 
 export {authApi,useSigninMutation,useSignupMutation,useUserQuery} from "./store/authApi"
 
-export{useGetMyOrdersQuery,useCreateOrderMutation} from "./store/orderApi"
+export{useGetMyOrdersQuery,useCreateOrderMutation,useChechOrderMutation,useGetPendingOrdersQuery} from "./store/orderApi"
 
+import {setAdmin,setAuth} from "./store/authSlice"

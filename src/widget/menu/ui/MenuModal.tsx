@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ModalLayout } from "../../../shared";
+import { ModalLayout, useAppSelector } from "../../../shared";
 
 export const MenuModal = ({
   isOpen,
@@ -10,24 +10,45 @@ export const MenuModal = ({
   onOpenModal: () => void;
   onCloseModal: () => void;
 }) => {
+  const { isAdmin, isAuth } = useAppSelector((state) => state.auth);
+
   return (
-    <ModalLayout styles="rounded-2xl" isOpen={isOpen} onCloseModal={onCloseModal}>
+    <ModalLayout
+      styles="rounded-2xl"
+      isOpen={isOpen}
+      onCloseModal={onCloseModal}
+    >
       <ul className="text-center">
-        <li className="mb-9">
-          <a className="text-zinc-950 underline" href="#about">
-            О НАС
-          </a>
-        </li>
-        <li className="mb-9">
-          <a className="text-zinc-950 underline" href="#services">
-            УСЛУГИ
-          </a>
-        </li>
-        <li className="">
-          <Link className="text-zinc-950 underline" to={"/signin"}>
-            ВОЙТИ
-          </Link>
-        </li>
+        <ul className="flex flex-col items-center gap-[15px]">
+          <li className="border-[#7BBAF5] px-4 py-2 block text-[white] border-2 bg-[#7BBAF5] rounded-[10px]">
+            <Link to={"/"}>ГЛАВНАЯ</Link>
+          </li>
+          <li className="border-[#7BBAF5] px-4 py-2 block text-[white] border-2 bg-[#7BBAF5] rounded-[10px]">
+            <a href={"#services"}>УСЛУГИ</a>
+          </li>
+          <li className="border-[#7BBAF5] px-4 py-2 block text-[white] border-2 bg-[#7BBAF5] rounded-[10px]">
+            <a href={"#about"}>О НАС</a>
+          </li>
+          {
+            !isAuth && (
+              <li>
+                  { 
+                    <Link className="border-[#7BBAF5] px-4 py-2 block text-[white] border-2 bg-[#7BBAF5] rounded-[10px]" to={"signin"}>
+                        ВОЙТИ
+                    </Link>
+                  }
+              </li>
+            )
+          }
+          {isAdmin && <Link className="border-[#7BBAF5] px-4 py-2 block text-[white] border-2 bg-[#7BBAF5] rounded-[10px]" to={"admin"}>админ панель</Link>}
+          {isAuth && (
+            <>
+              <li className="border-[#7BBAF5] px-4 py-2 block text-[white] border-2 bg-[#7BBAF5] rounded-[10px]">
+                <button className="">ВЫЙТИ</button>
+              </li>
+            </>
+          )}                   
+        </ul>
       </ul>
     </ModalLayout>
   );

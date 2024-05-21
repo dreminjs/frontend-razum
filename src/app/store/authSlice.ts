@@ -1,12 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit"
 
 interface IStore {
-    isAuth:boolean
+    isAuth:boolean,
+    isAdmin:boolean,
 }
 
 const initialState:IStore = {
     isAuth:false,
-
+    isAdmin:false
 }
 
 export const authSlice = createSlice({
@@ -15,8 +16,11 @@ export const authSlice = createSlice({
     reducers: {
         setAuth(state,{payload} : {payload:boolean}) {
             state.isAuth = payload
+        },
+        setAdmin(state,{payload} : {payload:boolean}) {
+            state.isAdmin = payload
         }
     }
   })
 
-export const {setAuth} = authSlice.actions
+export const {setAuth,setAdmin} = authSlice.actions

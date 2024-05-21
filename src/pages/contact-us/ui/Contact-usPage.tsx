@@ -40,16 +40,18 @@ export const ContactUsPage = () => {
                             <input type="text" {...register('text')} placeholder="Опишите свой проект" className="outline-none bg-transparent text-[white] placeholder-[white] border-b-2 border-[white] block w-full" />
                             <button className="bg-[white] px-[20px] py-[10px] rounded-[10px] text-[#2E2BD0] mt-auto">Отправить</button>
                         </form>
-                        <ul className="h-[600px] bg-[white] basis-[40%] rounded-[40px]">
+                        <ul className="h-[600px] bg-[white] basis-[40%] rounded-[40px] py-[15px]">
                             {
-                               isSuccess && data.map((el:any) => (
-                                    <li>
-                                        <p>
-                                            {el.text}
-                                        </p>
-                                        <p>
-                                            {el.status}
-                                        </p>
+                               isSuccess && data.map((el:any,idx:number) => (
+                                    <li key={idx} className={`mx-auto w-[80%] px-[5px] py-[15px] border-2 ${el.status === "canceled" ? "border-[red] mb-2 " : ""}`}>
+                                        <div>
+                                            <p>                                             
+                                                {el.text}
+                                            </p>
+                                        </div>
+                                        <div>
+                                            message: {el.message}
+                                        </div>
                                     </li>
                                 ))
                             }

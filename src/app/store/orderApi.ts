@@ -11,6 +11,20 @@ export const orderApi = baseApi.injectEndpoints({
                 credentials:"include"
             })
         }),
+        chechOrder:builder.mutation({
+            query:({body,id}) => ({
+                url:`order/${id}`,
+                credentials:"include",
+                body,
+                method:"PUT"
+            })
+        }),
+        getPendingOrders:builder.query({
+            query:() => ({
+                url:"order/admin",
+                credentials:"include"
+            })
+        }),
         createOrder:builder.mutation({
             query:({body,userId}) => ({
                 url:"order",
@@ -18,11 +32,11 @@ export const orderApi = baseApi.injectEndpoints({
                 method:"POST",
                 credentials:"include",
                 headers:{
-                    "userId":userId
+                    "userId":String(userId)
                 }
             })
         })
     })
 })
 
-export const {useGetMyOrdersQuery,useCreateOrderMutation} = orderApi
+export const {useGetMyOrdersQuery,useCreateOrderMutation,useChechOrderMutation,useGetPendingOrdersQuery,} = orderApi
