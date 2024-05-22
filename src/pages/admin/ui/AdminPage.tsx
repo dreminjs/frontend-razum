@@ -51,6 +51,8 @@ export const AdminPage = () => {
         body: { message, status: isRejected ? "canceled" : "done" },
         id,
       });
+
+      setMessage("")
     }
   };
 
@@ -71,7 +73,7 @@ export const AdminPage = () => {
   return (
     <div className="bg-[url('../../../src/assets/bg-spa.jpg')] min-h-screen bg-cover bg-no-repeat bg-center ">
       <Header />
-      <div className="bg-[#55C7D8] py-[25px] rounded-[75px] px-[100px] h-[600px] w-[85%] mx-auto">
+      <div className="bg-[#55C7D8] py-[25px] rounded-[75px] px-[100px] w-[85%] mx-auto">
         <h3 className="text-3xl text-center mt-[10px] mb-[30px] text-[white]">
           Админ панель
         </h3>
@@ -98,7 +100,7 @@ export const AdminPage = () => {
               </div>
             </li>
           ))}
-          {pendingOrders == null || pendingOrders?.length === 0 && <li>нет заявок</li>}
+          {pendingOrders?.length === 0 && <li className="text-center text-[white] text-[30px]">нет заявок</li>}
         </ul>
         <MessageModal
           onCloseModal={handleCloseModal}
