@@ -12,7 +12,7 @@ const schema = yup.object({
 
 export const ContactUsPage = () => {
 
-    const {data,isLoading,isSuccess,refetch} = useGetMyOrdersQuery("")
+    const {data,isLoading,isSuccess,refetch} = useGetMyOrdersQuery(localStorage.getItem("userId"))
 
     const [createOrder,{isLoading:creatingOrderIsLoading,isSuccess:creatingOrderIsSuccess}] = useCreateOrderMutation()
 
@@ -29,6 +29,8 @@ export const ContactUsPage = () => {
 
     const submit = (data:any) => createOrder({body:data,userId:localStorage.getItem("userId")},)
 
+    console.log(localStorage.getItem("userId"))
+
     return (
         <div className="bg-[url('../../../src/assets/bg-spa.jpg')] min-h-screen bg-cover bg-no-repeat bg-center ">
             <Header/>
@@ -42,7 +44,7 @@ export const ContactUsPage = () => {
                         </form>
                         <ul className="h-[600px] bg-[white] basis-[40%] rounded-[40px] py-[15px]">
                             {
-                               isSuccess && data.map((el:any,idx:number) => (
+                               isSuccess && data?.map((el:any,idx:number) => (
                                     <li key={idx} className={`mx-auto w-[80%] px-[5px] py-[15px] border-2 rounded-[25px] ${el.status === "canceled" ? "border-[red] mb-2 " : "border-[green] mb-2"}`}>
                                         <div>
                                             <p>                                             

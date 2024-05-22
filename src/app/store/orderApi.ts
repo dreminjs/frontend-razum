@@ -6,9 +6,12 @@ import { baseApi } from "./baseApi";
 export const orderApi = baseApi.injectEndpoints({
     endpoints:(builder) => ({
         getMyOrders:builder.query({
-            query:() => ({
+            query:(id) => ({
                 url:"order",
-                credentials:"include"
+                credentials:"include",
+                headers:{
+                    "userId":String(id)
+                }
             })
         }),
         chechOrder:builder.mutation({

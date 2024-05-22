@@ -36,6 +36,12 @@ export const Home = () => {
     }
   }, [isSuccess]);
 
+  const logout = () => {
+    dispatch(setAuth(false));
+    dispatch(setAdmin(false));
+    localStorage.clear()
+  }
+
   return (
     <div className="bg-[#7BBAF5]">
       <MenuModal
@@ -71,7 +77,7 @@ export const Home = () => {
             {isAuth && (
               <>
                 <li className="border-[#7BBAF5] px-4 py-2 block text-[white] border-2 bg-[#7BBAF5] rounded-[10px]">
-                  <button className="text-neutral-50">ВЫЙТИ</button>
+                  <button onClick={logout} className="text-neutral-50">ВЫЙТИ</button>
                 </li>
                 <li className="border-[#7BBAF5] px-4 py-2 block text-[white] border-2 bg-[#7BBAF5] rounded-[10px]">
                   <Link to={"/contact-us"}>ВАШИ ЗАЯВКИ</Link>
