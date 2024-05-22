@@ -81,19 +81,19 @@ export const AdminPage = () => {
         <ul className="list-none mx-auto w-[50%]">
           {pendingOrders?.map((order: any, idx: number) => (
             <li className="mb-[15px] border-2 px-[10px] py-[5px]" key={idx}>
-              <p>{order.text}</p>
+              <p className="text-white text-[20px]">{order.text}</p>
               <div>
                 <button
                   id={order.id}
                   onClick={handleAllowOrder}
-                  className="text-[20px]"
+                  className="text-[35px] mr-[15px]"
                 >
                   ✅
                 </button>
                 <button
                   id={order.id}
                   onClick={handleCancelOrder}
-                  className="text-[20px]"
+                  className="text-[35px]"
                 >
                   ❌
                 </button>
