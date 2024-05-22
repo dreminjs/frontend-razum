@@ -43,7 +43,7 @@ export const ContactUsPage = () => {
                         <ul className="h-[600px] bg-[white] basis-[40%] rounded-[40px] py-[15px]">
                             {
                                isSuccess && data.map((el:any,idx:number) => (
-                                    <li key={idx} className={`mx-auto w-[80%] px-[5px] py-[15px] border-2 ${el.status === "canceled" ? "border-[red] mb-2 " : ""}`}>
+                                    <li key={idx} className={`mx-auto w-[80%] px-[5px] py-[15px] border-2 rounded-[25px] ${el.status === "canceled" ? "border-[red] mb-2 " : "border-[green] mb-2"}`}>
                                         <div>
                                             <p>                                             
                                                 {el.text}

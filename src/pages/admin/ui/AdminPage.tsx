@@ -3,6 +3,7 @@ import { useChechOrderMutation, useGetPendingOrdersQuery } from "../../../app";
 import { MessageModal } from "../../../widget/messageModal";
 import { useAppSelector } from "../../../shared";
 import { useNavigate } from "react-router-dom";
+import { Header } from "../../../features/header";
 
 export const AdminPage = () => {
   const [checkOrder, { isSuccess: checkOrderIsSuccess }] =
@@ -62,10 +63,14 @@ export const AdminPage = () => {
     }
   }, [checkOrderIsSuccess]);
 
+  useEffect(() => {
+    refetch()
+  },[])
+
   return (
     <div>
+      <Header/>
       <h3 className="text-3xl text-center mt-[10px] mb-[30px]">Админ панель</h3>
-
       <h3 className="mb-[15px] text-2xl text-center">Заявки</h3>
       <ul className="list-none mx-auto w-[50%]">
         {pendingOrders?.map((order: any, idx: number) => (

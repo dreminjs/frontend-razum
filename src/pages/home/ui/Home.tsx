@@ -13,6 +13,7 @@ import { useUserQuery } from "../../../app";
 import { setAdmin, setAuth } from "../../../app/store/authSlice";
 
 export const Home = () => {
+  
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   const handleOpenModal = () => setIsModalOpen(true);
@@ -232,7 +233,7 @@ export const Home = () => {
                 аналитических систем, а также разработки собственных систем
                 анализа данных, отвечающих специфике вашего бизнес-проекта. .
               </p>
-              <button className="bg-[#2E2BD0] text-center px-[25px] py-[10px] text-white rounded-[100px] group-hover:bg-[white] group-hover:text-black" type="button">Заказать сейчас</button>
+              <Link to={isAuth ? "/contact-us" : "/signin"} className="bg-[#2E2BD0] text-center px-[25px] py-[10px] text-white rounded-[100px] group-hover:bg-[white] group-hover:text-black" type="button">Заказать сейчас</Link>
             </li>
             <li className="group hover:bg-gradient-to-l from-[#2E2BD0] to-[#7876F2] basis-[30%] bg-[#93A3B3] px-[25px] py-[25px] flex flex-col items-center justify-between text-center rounded-[24px]">
               <h4 className="text-[#170F49] font-black mb-5 group-hover:text-white">
@@ -245,7 +246,7 @@ export const Home = () => {
                 ваши услуги и продукты привлекательными на любом смартфоне или
                 планшете
               </p>
-              <button className="bg-[#2E2BD0] text-center px-[25px] py-[10px] text-white rounded-[100px] group-hover:bg-[white] group-hover:text-black" type="button">Заказать сейчас</button>
+              <Link to={isAuth ? "/contact-us" : "/signin"} className="bg-[#2E2BD0] text-center px-[25px] py-[10px] text-white rounded-[100px] group-hover:bg-[white] group-hover:text-black" type="button">Заказать сейчас</Link>
             </li>
             <li className="group hover:bg-gradient-to-l from-[#2E2BD0] to-[#7876F2] basis-[30%] bg-[#93A3B3] px-[25px] py-[25px] flex flex-col items-center justify-between text-center rounded-[24px]">
               <h4 className="text-[#170F49] font-black mb-5 group-hover:text-white">Разработка ПО</h4>
@@ -255,7 +256,7 @@ export const Home = () => {
                 проектирование, написание, тестирование и поддержка компьютерных
                 программ для решения ваших бизнес-задач.
               </p>
-              <button className="bg-[#2E2BD0] text-center px-[25px] py-[10px] text-white rounded-[100px] group-hover:bg-[white] group-hover:text-black" type="button">Заказать сейчас</button>
+              <Link to={isAuth ? "/contact-us" : "/signin"} className="bg-[#2E2BD0] text-center px-[25px] py-[10px] text-white rounded-[100px] group-hover:bg-[white] group-hover:text-black" type="button">Заказать сейчас</Link>
             </li> 
           </ul>
         </Container>
