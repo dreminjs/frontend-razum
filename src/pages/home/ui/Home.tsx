@@ -54,7 +54,7 @@ export const Home = () => {
           <Link to={"/"}>
             <img src={Logo} alt="logo rozum systems" />
           </Link>
-          <ul className="flex gap-[17px] max-md:hidden">
+          <ul className="flex gap-[17px] max-[1000px]:hidden">
             <li className="border-[#7BBAF5] px-4 py-2 block text-[white] border-2 bg-[#7BBAF5] rounded-[10px]">
               <a className="text-neutral-50" href="#about">
                 О НАС
@@ -79,7 +79,7 @@ export const Home = () => {
                 <li className="border-[#7BBAF5] px-4 py-2 block text-[white] border-2 bg-[#7BBAF5] rounded-[10px]">
                   <button onClick={logout} className="text-neutral-50">ВЫЙТИ</button>
                 </li>
-                <li className="border-[#7BBAF5] px-4 py-2 block text-[white] border-2 bg-[#7BBAF5] rounded-[10px]">
+                <li className={`border-[#7BBAF5] px-4 py-2 block text-[white] border-2 bg-[#7BBAF5] rounded-[10px]`}>
                   <Link to={"/contact-us"}>ВАШИ ЗАЯВКИ</Link>
                 </li>
               </>
@@ -89,7 +89,7 @@ export const Home = () => {
                 <li>
                   <Link
                     to={"admin"}
-                    className="border-[#7BBAF5] px-4 py-2 block text-[white] border-2 bg-[#7BBAF5] rounded-[10px]"
+                    className={`border-[#7BBAF5] px-4 py-2 block text-[white] border-2 bg-[#7BBAF5] rounded-[10px]`}
                   >
                     АДМИН ПАНЕЛЬ
                   </Link>
@@ -97,7 +97,7 @@ export const Home = () => {
               </>
             )}
           </ul>
-          <button onClick={handleOpenModal} className="md:hidden">
+          <button onClick={handleOpenModal} className="hidden max-[1000px]:block">
             <img src={Burger} className="h-14 w-14" alt="" />
           </button>
         </nav>

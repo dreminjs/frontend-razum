@@ -9,9 +9,9 @@ export const AdminPage = () => {
   const [checkOrder, { isSuccess: checkOrderIsSuccess }] =
     useChechOrderMutation();
 
-  const { data: pendingOrders,refetch } = useGetPendingOrdersQuery("");
+  const { data: pendingOrders, refetch } = useGetPendingOrdersQuery("");
 
-  const { isAdmin } = useAppSelector(state => state.auth)
+  const { isAdmin } = useAppSelector((state) => state.auth);
 
   const [message, setMessage] = useState("");
 
@@ -25,7 +25,7 @@ export const AdminPage = () => {
 
   const [isRejected, setIsRejected] = useState(false);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleAllowOrder = (e: any) => {
     setIsModalOpen(true);
@@ -40,17 +40,16 @@ export const AdminPage = () => {
   };
 
   useEffect(() => {
-    if(!isAdmin){
-      navigate("/")
+    if (!isAdmin) {
+      navigate("/");
     }
-  },[isAdmin])
+  }, [isAdmin]);
 
   const onSubmit = () => {
-
     if (message.length >= 1) {
       checkOrder({
         body: { message, status: isRejected ? "canceled" : "done" },
-        id
+        id,
       });
     }
   };
@@ -58,51 +57,57 @@ export const AdminPage = () => {
   useEffect(() => {
     if (checkOrderIsSuccess) {
       setIsRejected(false);
-      setIsModalOpen(false)
-      refetch()
+      setIsModalOpen(false);
+      refetch();
     }
   }, [checkOrderIsSuccess]);
 
   useEffect(() => {
-    refetch()
-  },[])
+    refetch();
+  }, []);
+
+  console.log(pendingOrders)
 
   return (
-    <div>
-      <Header/>
-      <h3 className="text-3xl text-center mt-[10px] mb-[30px]">Админ панель</h3>
-      <h3 className="mb-[15px] text-2xl text-center">Заявки</h3>
-      <ul className="list-none mx-auto w-[50%]">
-        {pendingOrders?.map((order: any, idx: number) => (
-          <li className="mb-[15px] border-2 px-[10px] py-[5px]" key={idx}>
-            <p>{order.text}</p>
-            <div>
-              <button
-                id={order.id}
-                onClick={handleAllowOrder}
-                className="text-[20px]"
-              >
-                ✅
-              </button>
-              <button
-                id={order.id}
-                onClick={handleCancelOrder}
-                className="text-[20px]"
-              >
-                ❌
-              </button>
-            </div>
-          </li>
-        ))}
-        {pendingOrders?.length === 0 && <li>нет заявок</li>}
-      </ul>
-      <MessageModal
-        onCloseModal={handleCloseModal}
-        message={message}
-        isOpen={isModalOpen}
-        onChangeMessage={handleChangeTextMessage}
-        onSendAnswer={onSubmit}
-      />
+    <div className="bg-[url('../../../src/assets/bg-spa.jpg')] min-h-screen bg-cover bg-no-repeat bg-center ">
+      <Header />
+      <div className="bg-[#55C7D8] py-[25px] rounded-[75px] px-[100px] h-[600px] w-[85%] mx-auto">
+        <h3 className="text-3xl text-center mt-[10px] mb-[30px] text-[white]">
+          Админ панель
+        </h3>
+        <h3 className="mb-[15px] text-2xl text-center text-[white]">Заявки</h3>
+        <ul className="list-none mx-auto w-[50%]">
+          {pendingOrders?.map((order: any, idx: number) => (
+            <li className="mb-[15px] border-2 px-[10px] py-[5px]" key={idx}>
+              <p>{order.text}</p>
+              <div>
+                <button
+                  id={order.id}
+                  onClick={handleAllowOrder}
+                  className="text-[20px]"
+                >
+                  ✅
+                </button>
+                <button
+                  id={order.id}
+                  onClick={handleCancelOrder}
+                  className="text-[20px]"
+                >
+                  ❌
+                </button>
+              </div>
+            </li>
+          ))}
+          {pendingOrders == null || pendingOrders?.length === 0 && <li>нет заявок</li>}
+        </ul>
+        <MessageModal
+          onCloseModal={handleCloseModal}
+          message={message}
+          isOpen={isModalOpen}
+          onChangeMessage={handleChangeTextMessage}
+          onSendAnswer={onSubmit}
+        />
+      </div>
     </div>
   );
 };
