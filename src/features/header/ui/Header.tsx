@@ -46,7 +46,7 @@ export const Header = () => {
       <header className="py-5">
         <Container>
           <nav className="flex justify-between">
-            <Link to={"/"}>
+            <Link to={"/"} className="mr-[10px]">
               <img
                 src={Logo}
                 alt="logo rozum systems"

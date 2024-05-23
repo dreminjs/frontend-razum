@@ -38,9 +38,7 @@ export const SigninPage = () => {
     const [signin,{isSuccess,isError,data}] = useSigninMutation()
 
     useEffect(() =>{
-        
         if(isSuccess){
-
             localStorage.setItem("userId",data.id)
             navigate("/contact-us")
         }
@@ -75,7 +73,7 @@ export const SigninPage = () => {
                         <input type="text" {...register("password")} placeholder="Пароль" className="outline-none border-b-2 text-[white] border-[white] bg-transparent mb-5 placeholder-[white] w-[75%] mx-auto block" />
                         {errors.password && <p className="w-[75%] mx-auto mb-2 text-[red]">{errors.password.message}</p>}
                     </div>
-                    <button className="bg-[#7BBAF5] text-[white] px-[25px] py-[10px] rounded-[10px] mx-auto w-[25%] block mb-2">ВОЙТИ</button>
+                    <button className="bg-[#7BBAF5] text-[white] px-[25px] py-[10px] rounded-[10px] mx-auto text-center block mb-2 max-[650px]:text-[10px]">ВОЙТИ</button>
                     <Link className="text-center block text-[white] underline" to="/signup">Зарегистрироваться</Link>
                 </form>             
             </Container>

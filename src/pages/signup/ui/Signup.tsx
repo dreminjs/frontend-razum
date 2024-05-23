@@ -67,7 +67,7 @@ export const SignupPage = () => {
             <Header/>
             <Container>
                 <form onSubmit={handleSubmit(onSubmit)} className="w-[75%] mx-auto py-[80px] bg-gradient-to-r from-[#54DED6] to-[#5957E1] rounded-[70px]">
-                    <h3 className="text-center text-5xl text-[white] mb-5">РЕГИСТРАЦИЯ</h3>
+                    <h3 className="text-center text-5xl text-[white] mb-5 max-[630px]:text-2xl">РЕГИСТРАЦИЯ</h3>
                     <div className="">
                         <input type="email" {...register("email")} placeholder="email" className="outline-none border-b-2 text-[white] border-[white] bg-transparent mb-5 placeholder-[white] w-[75%] mx-auto block"  />
                         {errors.email && <p className="w-[75%] mx-auto mb-2 text-[red]">{errors.email.message}</p>}
@@ -84,7 +84,7 @@ export const SignupPage = () => {
                         <input type="text" {...register("password")} placeholder="Пароль" className="outline-none border-b-2 text-[white] border-[white] bg-transparent mb-5 placeholder-[white] w-[75%] mx-auto block" />
                         {errors.password && <p className="w-[75%] mx-auto mb-2 text-[red]">{errors.password.message}</p>}
                     </div>
-                    <button className="bg-[#7BBAF5] text-[white] px-[25px] py-[10px] rounded-[10px] mx-auto w-[25%] block mb-2">Зарегистрироваться</button>
+                    <button className="bg-[#7BBAF5] text-[white] px-[25px] py-[10px] rounded-[10px] mx-auto text-center block mb-2 max-[650px]:text-[10px]">ЗАРЕГИСТРИРОВАТЬСЯ</button>
                     <Link className="text-center block text-[white] underline" to="/signin">Войти</Link>
                 </form>             
             </Container>

@@ -1,6 +1,7 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ModalLayout, useAppSelector } from "../../../shared";
-
+import { useAppDispatch } from "../../../shared/";
+import { setAdmin, setAuth } from "../../../app/store/authSlice";
 export const MenuModal = ({
   isOpen,
   onOpenModal,
@@ -10,9 +11,19 @@ export const MenuModal = ({
   onOpenModal: () => void;
   onCloseModal: () => void;
 }) => {
+
+  const navigate = useNavigate();
+
   const { isAdmin, isAuth } = useAppSelector((state) => state.auth);
 
-  console.log(location);
+  const dispatch = useAppDispatch()
+
+  const logout = () => {
+    dispatch(setAuth(false));
+    dispatch(setAdmin(false));
+    localStorage.clear();
+    navigate("/");
+  };
 
   return (
     <ModalLayout
@@ -21,7 +32,7 @@ export const MenuModal = ({
       onCloseModal={onCloseModal}
     >
       <ul className="text-center">
-        <ul className="flex flex-col items-center gap-[15px]">
+        <ul className="flex flex-col items-center justify-center gap-[15px]">
           <li
             className={`px-4 py-2 block text-[white] rounded-[10px] w-1/2 ${
               location.pathname === "/" ? "bg-[#2E2BD0]" : "bg-[#7BBAF5]"
@@ -32,15 +43,15 @@ export const MenuModal = ({
           {location.pathname === "/" && (
             <>
               <li className="border-[#7BBAF5] px-4 py-2 block text-[white] border-2 bg-[#7BBAF5] rounded-[10px] w-1/2">
-                <a href={"#services"}>УСЛУГИ</a>
+                <a onClick={onCloseModal} href={"#services"}>УСЛУГИ</a>
               </li>
               <li className="border-[#7BBAF5] px-4 py-2 block text-[white] border-2 bg-[#7BBAF5] rounded-[10px] w-1/2">
-                <a href={"#about"}>О НАС</a>
+                <a onClick={onCloseModal} href={"#about"}>О НАС</a>
               </li>
             </>
           )}
           {!isAuth && (
-            <li  className={`px-4 py-2 block text-[white] bg-[#7BBAF5]rounded-[10px] w-1/2`}>
+            <li className={`px-4 py-2 block text-[white] rounded-[10px] w-1/2 ${location.pathname === "/signin" ? "bg-[#2E2BD0]" : "bg-[#7BBAF5]" }`}>
               {
                 <Link
                   to={"/signin"}
@@ -50,7 +61,6 @@ export const MenuModal = ({
               }
             </li>
           )}
-
           {isAdmin && (
             <Link
               className={`px-4 py-2 block text-[white] rounded-[10px] w-1/2 ${
@@ -70,7 +80,7 @@ export const MenuModal = ({
               >
                 <Link to={"/contact-us"}>ВАШИ ЗАЯВКИ</Link>
               </li>
-              <li className="border-[#7BBAF5] px-4 py-2 block text-[white] border-2 bg-[#7BBAF5] rounded-[10px] w-1/2">
+              <li onClick={logout} className="border-[#7BBAF5] px-4 py-2 block text-[white] border-2 bg-[#7BBAF5] rounded-[10px] w-1/2">
                 <button className="">ВЫЙТИ</button>
               </li>
             </>

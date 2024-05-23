@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useChechOrderMutation, useGetPendingOrdersQuery } from "../../../app";
-import { MessageModal } from "../../../widget/messageModal";
+import { sendMessageModal } from "../../../widget/messageModal";
 import { useAppSelector } from "../../../shared";
 import { useNavigate } from "react-router-dom";
 import { Header } from "../../../features/header";
@@ -102,7 +102,7 @@ export const AdminPage = () => {
           ))}
           {pendingOrders?.length === 0 && <li className="text-center text-[white] text-[30px]">нет заявок</li>}
         </ul>
-        <MessageModal
+        <sendMessageModal
           onCloseModal={handleCloseModal}
           message={message}
           isOpen={isModalOpen}
