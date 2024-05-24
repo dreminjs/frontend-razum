@@ -4,8 +4,9 @@ import { useGetMyOrdersQuery, useCreateOrderMutation } from "../../../app/";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useEffect,useState } from "react";
+import { useEffect, useState } from "react";
 import { MessageModal } from "../../../widget/messageModal/ui/MessageModal";
+import { ResponseMessageModal } from "../../../features/ResponseMessageModal";
 
 const schema = yup.object({
   text: yup
@@ -22,27 +23,31 @@ export const ContactUsPage = () => {
 
   const [
     createOrder,
-    { isLoading: creatingOrderIsLoading, isSuccess: creatingOrderIsSuccess },
+    {
+      isLoading: creatingOrderIsLoading,
+      isSuccess: creatingOrderIsSuccess,
+      isError: creatingOrderIsError,
+    },
   ] = useCreateOrderMutation();
 
-  const [text,setText] = useState("")
+  const [text, setText] = useState("");
 
-  const [status,setStatus] = useState("")
+  const [status, setStatus] = useState("");
 
-  const [message,setMessage] = useState("")
+  const [message, setMessage] = useState("");
 
-  const [isModalOpen,setIsModalOpen] = useState(false)
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleOpenModal = (payload:any) => {
-    setIsModalOpen(true)
-    setStatus(payload.status)
-    setText(payload.text)
-    setMessage(payload.message)
-  }
+  const handleOpenModal = (payload: any) => {
+    setIsModalOpen(true);
+    setStatus(payload.status);
+    setText(payload.text);
+    setMessage(payload.message);
+  };
 
   const handleCloseModal = () => {
-    setIsModalOpen(false)
-  }
+    setIsModalOpen(false);
+  };
 
   const {
     register,
@@ -59,11 +64,32 @@ export const ContactUsPage = () => {
     }
   }, [creatingOrderIsSuccess]);
 
+  useEffect(() => {
+    if (creatingOrderIsLoading) {
+      setMessage("Loading...");
+      setIsModalOpen(true);
+      const id = setTimeout(() => {
+        setMessage("");
+        setIsModalOpen(false);
+        return () => clearTimeout(id);
+      }, 3500);
+    }
+
+    if (creatingOrderIsError) {
+      setMessage("Проверте данные которые вы ввели");
+      setIsModalOpen(true);
+      const id = setTimeout(() => {
+        setMessage("");
+        setIsModalOpen(false);
+        return () => clearTimeout(id);
+      }, 3500);
+    }
+  }, [creatingOrderIsLoading, creatingOrderIsError]);
+
   const submit = (data: any) => {
     createOrder({ body: data, userId: localStorage.getItem("userId") });
     reset();
   };
-
 
   return (
     <>
@@ -76,13 +102,13 @@ export const ContactUsPage = () => {
             <form
               onSubmit={handleSubmit(submit)}
               className="basis-[40%] mb-[15px]"
-              >
+            >
               <input
                 type="text"
                 {...register("text")}
                 placeholder="Опишите свой проект"
                 className="outline-none bg-transparent text-[white] placeholder-[white] border-b-2 border-[white] block w-full mb-5"
-                />
+              />
               <button className="bg-[white] px-[20px] py-[10px] rounded-[10px] text-[#2E2BD0] mt-auto">
                 Отправить
               </button>
@@ -91,24 +117,31 @@ export const ContactUsPage = () => {
               {isSuccess &&
                 data?.map((el: any, idx: number) => (
                   <li
-                  key={idx}
-                  className={`mx-auto w-[80%] px-[5px] py-[15px] border-2 rounded-[25px] mb-2 ${
-                    el.status === "canceled" && "border-[red] mb-2"
-                  } ${el.status === "done" && "border-[green]"}
+                    key={idx}
+                    className={`mx-auto w-[80%] px-[5px] py-[15px] border-2 rounded-[25px] mb-2 ${
+                      el.status === "canceled" && "border-[red] mb-2"
+                    } ${el.status === "done" && "border-[green]"}
                   ${el.status === "pending" && "border-[gray]"} 
                   `}
                   >
-                    <>                  
+                    <>
                       <div className="max-[1000px]:hidden">
                         <p>{el.text}</p>
                       </div>
-                      {
-                        el.status !== "pending"
-                        &&
-                        <p className="max-[1000px]:hidden">message: {el.message}</p>
-                      }
-                      <button onClick={handleOpenModal.bind(null,{status:el.status,text:el.text,message:el.message})} className="min-[1000px]:hidden w-full">
-                          {el.text}
+                      {el.status !== "pending" && (
+                        <p className="max-[1000px]:hidden">
+                          message: {el.message}
+                        </p>
+                      )}
+                      <button
+                        onClick={handleOpenModal.bind(null, {
+                          status: el.status,
+                          text: el.text,
+                          message: el.message,
+                        })}
+                        className="min-[1000px]:hidden w-full"
+                      >
+                        {el.text}
                       </button>
                     </>
                   </li>
@@ -116,14 +149,22 @@ export const ContactUsPage = () => {
             </ul>
           </div>
         </div>
-        </Layout>
-        <MessageModal
-              onCloseModal={handleCloseModal} 
-              isOpen={isModalOpen}
-              message={message}
-              text={text}
-              status={status}
-        />
+      </Layout>
+      <MessageModal
+        onCloseModal={handleCloseModal}
+        isOpen={isModalOpen}
+        message={message}
+        text={text}
+        status={status}
+      />
+      <ResponseMessageModal
+        message={message}
+        onCloseModal={() => setIsModalOpen(false)}
+        isOpen={isModalOpen}
+        isError={creatingOrderIsError}
+        isLoading={creatingOrderIsLoading}
+        isSuccess={creatingOrderIsSuccess}
+      />
     </>
   );
 };

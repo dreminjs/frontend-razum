@@ -5,12 +5,13 @@ import { Container, useAppSelector } from "../../../shared";
 import { useNavigate } from "react-router-dom";
 import { Header } from "../../../features/header";
 import { Layout } from "../../../shared/ui/Layout";
+import { ResponseMessageModal } from "../../../features/ResponseMessageModal";
 
 export const AdminPage = () => {
   const [checkOrder, { isSuccess: checkOrderIsSuccess }] =
     useChechOrderMutation();
 
-  const { data: pendingOrders, refetch } = useGetPendingOrdersQuery("");
+  const { data: pendingOrders, refetch,isSuccess,isLoading,isError } = useGetPendingOrdersQuery("");
 
   const { isAdmin } = useAppSelector((state) => state.auth);
 
@@ -53,7 +54,7 @@ export const AdminPage = () => {
         id,
       });
 
-      setMessage("")
+      setMessage("");
     }
   };
 
@@ -64,6 +65,28 @@ export const AdminPage = () => {
       refetch();
     }
   }, [checkOrderIsSuccess]);
+
+  useEffect(() => {
+    if (isLoading) {
+      setMessage("Loading...");
+      setIsModalOpen(true);
+      const id = setTimeout(() => {
+        setMessage("");
+        setIsModalOpen(false);
+        return () => clearTimeout(id);
+      }, 3500);
+    }
+
+    if (isError) {
+      setMessage("Проверте данные которые вы ввели");
+      setIsModalOpen(true);
+      const id = setTimeout(() => {
+        setMessage("");
+        setIsModalOpen(false);
+        return () => clearTimeout(id);
+      }, 3500);
+    }
+  }, [isLoading, isError]);
 
   useEffect(() => {
     refetch();
@@ -85,20 +108,22 @@ export const AdminPage = () => {
                   id={order.id}
                   onClick={handleAllowOrder}
                   className="text-[35px] mr-[15px]"
-                  >
+                >
                   ✅
                 </button>
                 <button
                   id={order.id}
                   onClick={handleCancelOrder}
                   className="text-[35px]"
-                  >
+                >
                   ❌
                 </button>
               </div>
             </li>
           ))}
-          {pendingOrders?.length === 0 && <li className="text-center text-[white] text-[30px]">нет заявок</li>}
+          {pendingOrders?.length === 0 && (
+            <li className="text-center text-[white] text-[30px]">нет заявок</li>
+          )}
         </ul>
         <SendMessageModal
           onCloseModal={handleCloseModal}
@@ -106,7 +131,15 @@ export const AdminPage = () => {
           isOpen={isModalOpen}
           onChangeMessage={handleChangeTextMessage}
           onSendAnswer={onSubmit}
-          />
+        />
+        <ResponseMessageModal
+          message={message}
+          onCloseModal={() => setIsModalOpen(false)}
+          isOpen={isModalOpen}
+          isError={isError}
+          isLoading={isLoading}
+          isSuccess={isSuccess}
+        />
       </div>
     </Layout>
   );
