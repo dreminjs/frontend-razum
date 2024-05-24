@@ -10,7 +10,7 @@ interface IProps {
     onSendAnswer:(data:any) => void
 }
 
-export const sendMessageModal = ({onChangeMessage,onCloseModal,isOpen,message,onSendAnswer}:IProps) => {
+export const SendMessageModal = ({onChangeMessage,onCloseModal,isOpen,message,onSendAnswer}:IProps) => {
 
 
     return (
