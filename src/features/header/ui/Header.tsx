@@ -28,7 +28,7 @@ export const Header = () => {
 
   useEffect(() => {
     if (isSuccess) {
-      dispatch(setAdmin(data.role === "admin" ? true : false));
+      dispatch(setAdmin(data.role === "admin"));
       dispatch(setAuth(true));
     } else {
       dispatch(setAuth(false));
