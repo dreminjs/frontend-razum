@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { useChechOrderMutation, useGetPendingOrdersQuery } from "../../../app";
 import { SendMessageModal } from "../../../widget/messageModal";
-import { useAppSelector } from "../../../shared";
+import { Container, useAppSelector } from "../../../shared";
 import { useNavigate } from "react-router-dom";
 import { Header } from "../../../features/header";
+import { Layout } from "../../../shared/ui/Layout";
 
 export const AdminPage = () => {
   const [checkOrder, { isSuccess: checkOrderIsSuccess }] =
@@ -68,17 +69,14 @@ export const AdminPage = () => {
     refetch();
   }, []);
 
-  console.log(pendingOrders)
-
   return (
-    <div className="bg-[url('../../../src/assets/bg-spa.jpg')] min-h-screen bg-cover bg-no-repeat bg-center ">
-      <Header />
-      <div className="bg-[#55C7D8] py-[25px] rounded-[75px] px-[100px] w-[85%] mx-auto">
+    <Layout>
+      <div className="bg-[#55C7D8] py-[25px] rounded-[75px] max-[700px]:px-[0px] px-[50px] max-[1200px]:w-[95%] w-[85%] mx-auto">
         <h3 className="text-3xl text-center mt-[10px] mb-[30px] text-[white]">
           Админ панель
         </h3>
         <h3 className="mb-[15px] text-2xl text-center text-[white]">Заявки</h3>
-        <ul className="list-none mx-auto w-[50%] bg-[white] basis-[40%] rounded-[40px] py-[15px] h-[calc(100vh-400px)] overflow-auto px-5 py-5">
+        <ul className="list-none mx-auto max-[1200px]:w-[75%] w-[50%] bg-[white] basis-[40%] rounded-[40px] py-[15px] h-[calc(100vh-400px)] overflow-auto px-5 py-5">
           {pendingOrders?.map((order: any, idx: number) => (
             <li className="mb-[15px] border-2 px-[10px] py-[5px]" key={idx}>
               <p className=" text-[20px]">{order.text}</p>
@@ -87,14 +85,14 @@ export const AdminPage = () => {
                   id={order.id}
                   onClick={handleAllowOrder}
                   className="text-[35px] mr-[15px]"
-                >
+                  >
                   ✅
                 </button>
                 <button
                   id={order.id}
                   onClick={handleCancelOrder}
                   className="text-[35px]"
-                >
+                  >
                   ❌
                 </button>
               </div>
@@ -108,8 +106,8 @@ export const AdminPage = () => {
           isOpen={isModalOpen}
           onChangeMessage={handleChangeTextMessage}
           onSendAnswer={onSubmit}
-        />
+          />
       </div>
-    </div>
+    </Layout>
   );
 };

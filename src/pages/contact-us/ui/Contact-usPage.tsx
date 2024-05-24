@@ -1,4 +1,4 @@
-import { Container } from "../../../shared";
+import { Container, Layout } from "../../../shared";
 import { Header } from "../../../features/header";
 import { useGetMyOrdersQuery, useCreateOrderMutation } from "../../../app/";
 import * as yup from "yup";
@@ -32,7 +32,6 @@ export const ContactUsPage = () => {
   const [message,setMessage] = useState("")
 
   const [isModalOpen,setIsModalOpen] = useState(false)
-
 
   const handleOpenModal = (payload:any) => {
     setIsModalOpen(true)
@@ -68,9 +67,7 @@ export const ContactUsPage = () => {
 
   return (
     <>
-    <div className="bg-[url('../../../src/assets/bg-spa.jpg')] min-h-screen bg-cover bg-no-repeat bg-center py-[15px]">
-      <Header />
-      <Container>
+      <Layout>
         <div className="bg-[#55C7D8] py-[25px] rounded-[75px] max-[540px]:px-[10px] px-[100px] h-[calc(100vh-150px)]">
           <h3 className="text-[30px] min-[1000px]:text-[44px] text-[white] text-centerm mb-5">
             Свяжись с нами
@@ -119,15 +116,14 @@ export const ContactUsPage = () => {
             </ul>
           </div>
         </div>
-      </Container>
-    </div>
-    <MessageModal
-      isOpen={isModalOpen}
-      onCloseModal={handleCloseModal}
-      text={text}
-      message=""
-      status={status}
-    />
+        </Layout>
+        <MessageModal
+              onCloseModal={handleCloseModal} 
+              isOpen={isModalOpen}
+              message={message}
+              text={text}
+              status={status}
+        />
     </>
   );
 };
