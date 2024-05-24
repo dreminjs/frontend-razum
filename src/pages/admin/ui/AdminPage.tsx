@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useChechOrderMutation, useGetPendingOrdersQuery } from "../../../app";
-import { sendMessageModal } from "../../../widget/messageModal";
+import { SendMessageModal } from "../../../widget/messageModal";
 import { useAppSelector } from "../../../shared";
 import { useNavigate } from "react-router-dom";
 import { Header } from "../../../features/header";
@@ -78,10 +78,10 @@ export const AdminPage = () => {
           Админ панель
         </h3>
         <h3 className="mb-[15px] text-2xl text-center text-[white]">Заявки</h3>
-        <ul className="list-none mx-auto w-[50%]">
+        <ul className="list-none mx-auto w-[50%] bg-[white] basis-[40%] rounded-[40px] py-[15px] h-[calc(100vh-400px)] overflow-auto px-5 py-5">
           {pendingOrders?.map((order: any, idx: number) => (
             <li className="mb-[15px] border-2 px-[10px] py-[5px]" key={idx}>
-              <p className="text-white text-[20px]">{order.text}</p>
+              <p className=" text-[20px]">{order.text}</p>
               <div>
                 <button
                   id={order.id}
@@ -102,7 +102,7 @@ export const AdminPage = () => {
           ))}
           {pendingOrders?.length === 0 && <li className="text-center text-[white] text-[30px]">нет заявок</li>}
         </ul>
-        <sendMessageModal
+        <SendMessageModal
           onCloseModal={handleCloseModal}
           message={message}
           isOpen={isModalOpen}

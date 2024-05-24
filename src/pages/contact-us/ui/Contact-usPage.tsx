@@ -71,7 +71,7 @@ export const ContactUsPage = () => {
     <div className="bg-[url('../../../src/assets/bg-spa.jpg')] min-h-screen bg-cover bg-no-repeat bg-center py-[15px]">
       <Header />
       <Container>
-        <div className="bg-[#55C7D8] py-[25px] rounded-[75px] max-[540px]:px-[10px] px-[100px]">
+        <div className="bg-[#55C7D8] py-[25px] rounded-[75px] max-[540px]:px-[10px] px-[100px] h-[calc(100vh-150px)]">
           <h3 className="text-[30px] min-[1000px]:text-[44px] text-[white] text-centerm mb-5">
             Свяжись с нами
           </h3>
@@ -90,7 +90,7 @@ export const ContactUsPage = () => {
                 Отправить
               </button>
             </form>
-            <ul className="bg-[white] basis-[40%] rounded-[40px] py-[15px]">
+            <ul className="bg-[white] basis-[40%] rounded-[40px] py-[15px] h-[calc(100vh-400px)] overflow-auto mx-5">
               {isSuccess &&
                 data?.map((el: any, idx: number) => (
                   <li

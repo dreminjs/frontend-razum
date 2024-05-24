@@ -1,1 +1,1 @@
-export {sendMessageModal} from "./ui/sendMessageModal"
+export {SendMessageModal} from "./ui/sendMessageModal"
