@@ -42,7 +42,7 @@ export const Header = () => {
 
   return (
     <>
-      <header className="py-5">
+      <header className="py-5 mb-[12px]">
         <Container>
           <nav className="flex justify-between">
             <Link to={"/"} className="mr-[10px]">

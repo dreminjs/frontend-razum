@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { Header } from "../../../features/header";
-import { Container, useAppDispatch } from "../../../shared/";
+import { Container, Layout, useAppDispatch } from "../../../shared/";
 import { useSignupMutation } from "../../../app";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -85,14 +85,12 @@ export const SignupPage = () => {
   },[isLoading,isError])
 
   return (
-    <div className="bg-[url('../../../src/assets/bg-spa.jpg')] min-h-screen bg-cover bg-no-repeat bg-center">
-      <Header />
-      <Container>
+    <Layout>
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="w-[75%] mx-auto py-[80px] bg-gradient-to-r from-[#54DED6] to-[#5957E1] rounded-[70px]"
+          className="w-[35%] mx-auto py-[80px] max-[1300px]:w-[50%] max-[800px]:w-[70%] max-[600px]:w-[85%] bg-gradient-to-r from-[#54DED6] to-[#5957E1] rounded-[70px]"
         >
-          <h3 className="text-center text-5xl text-[white] mb-5 max-[630px]:text-2xl">
+          <h3 className="text-center text-5xl text-[white] mb-5 max-[1230px]:text-3xl">
             РЕГИСТРАЦИЯ
           </h3>
           <div className="">
@@ -157,7 +155,6 @@ export const SignupPage = () => {
             Войти
           </Link>
         </form>
-      </Container>
       <ResponseMessageModal
         message={message}
         onCloseModal={() => setIsModalOpen(false)}
@@ -166,6 +163,6 @@ export const SignupPage = () => {
         isLoading={isLoading}
         isSuccess={isSuccess}
       />
-    </div>
+      </Layout>
   );
 };

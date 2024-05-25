@@ -77,7 +77,7 @@ export const SigninPage = () => {
     <Layout>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="w-[75%] mx-auto py-[80px] bg-gradient-to-r from-[#54DED6] to-[#5957E1] rounded-[70px]"
+        className="w-[35%] max-[1300px]:w-[50%] max-[800px]:w-[70%] max-[600px]:w-[85%] mx-auto py-[80px] bg-gradient-to-r from-[#54DED6] to-[#5957E1] rounded-[70px]"
       >
         <h3 className="text-center text-5xl text-[white] mb-5">ВОЙТИ</h3>
         <div className="">
