@@ -38,6 +38,8 @@ export const ContactUsPage = () => {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  const [isResponseModalOpen, setIsResponseModalOpen] = useState(false);
+
   const handleOpenModal = (payload: any) => {
     setIsModalOpen(true);
     setStatus(payload.status);
@@ -67,20 +69,20 @@ export const ContactUsPage = () => {
   useEffect(() => {
     if (creatingOrderIsLoading) {
       setMessage("Loading...");
-      setIsModalOpen(true);
+      setIsResponseModalOpen(true);
       const id = setTimeout(() => {
         setMessage("");
-        setIsModalOpen(false);
+        setIsResponseModalOpen(false);
         return () => clearTimeout(id);
       }, 3500);
     }
 
     if (creatingOrderIsError) {
       setMessage("Проверте данные которые вы ввели");
-      setIsModalOpen(true);
+      setIsResponseModalOpen(true);
       const id = setTimeout(() => {
         setMessage("");
-        setIsModalOpen(false);
+        setIsResponseModalOpen(false);
         return () => clearTimeout(id);
       }, 3500);
     }
@@ -160,7 +162,7 @@ export const ContactUsPage = () => {
       <ResponseMessageModal
         message={message}
         onCloseModal={() => setIsModalOpen(false)}
-        isOpen={isModalOpen}
+        isOpen={isResponseModalOpen}
         isError={creatingOrderIsError}
         isLoading={creatingOrderIsLoading}
         isSuccess={creatingOrderIsSuccess}

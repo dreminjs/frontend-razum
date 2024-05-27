@@ -23,6 +23,8 @@ export const AdminPage = () => {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  const [isResponseModalOpen, setIsResponseModalOpen] = useState(false);
+
   const handleCloseModal = () => setIsModalOpen(false);
 
   const [isRejected, setIsRejected] = useState(false);
@@ -53,7 +55,7 @@ export const AdminPage = () => {
         body: { message, status: isRejected ? "canceled" : "done" },
         id,
       });
-
+      setIsResponseModalOpen(false)
       setMessage("");
     }
   };
@@ -62,6 +64,7 @@ export const AdminPage = () => {
     if (checkOrderIsSuccess) {
       setIsRejected(false);
       setIsModalOpen(false);
+      setIsResponseModalOpen(false)
       refetch();
     }
   }, [checkOrderIsSuccess]);
@@ -69,20 +72,20 @@ export const AdminPage = () => {
   useEffect(() => {
     if (isLoading) {
       setMessage("Loading...");
-      setIsModalOpen(true);
+      setIsResponseModalOpen(true);
       const id = setTimeout(() => {
         setMessage("");
-        setIsModalOpen(false);
+        setIsResponseModalOpen(false);
         return () => clearTimeout(id);
       }, 3500);
     }
 
     if (isError) {
       setMessage("Проверте данные которые вы ввели");
-      setIsModalOpen(true);
+      setIsResponseModalOpen(true);
       const id = setTimeout(() => {
         setMessage("");
-        setIsModalOpen(false);
+        setIsResponseModalOpen(false);
         return () => clearTimeout(id);
       }, 3500);
     }
@@ -135,7 +138,7 @@ export const AdminPage = () => {
         <ResponseMessageModal
           message={message}
           onCloseModal={() => setIsModalOpen(false)}
-          isOpen={isModalOpen}
+          isOpen={isResponseModalOpen}
           isError={isError}
           isLoading={isLoading}
           isSuccess={isSuccess}
